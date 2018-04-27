@@ -1,10 +1,9 @@
-export default (state = {counter: 0}, action) => {
+import { ADD_COUNTER } from '../actions/types';
+
+export default (state = 0, action) => {
   switch (action.type) {
-    case 'INCREASE_COUNTER': {
-        return {
-          ...state,
-          counter: counter + 1
-        };
+    case ADD_COUNTER: {
+        return state + 1;
     }
     default: {
       return state;

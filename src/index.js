@@ -8,6 +8,8 @@ import {
 } from 'react-native';
 
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { increaseCounter } from './actions';
 
 class App extends Component {
   constructor(props){
@@ -26,7 +28,7 @@ class App extends Component {
         <Button 
           title="Press me"
           style={styles.button}
-          onPress={()=>{this.setState({counter: this.state.counter + 1})}}
+          onPress={()=>{this.props.increaseCounter()}}
         />
       </View>
     );
@@ -52,8 +54,14 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => {
   return {
-    counter: state.counter.counter
+    counter: state.counter
   }
 }
 
-export default connect(mapStateToProps)(App)
+const mapDispatchToProps = (dispatch) => {
+  return {
+    increaseCounter: bindActionCreators(increaseCounter, dispatch)
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)
