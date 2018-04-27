@@ -1,4 +1,4 @@
-function counterReducer(state = {counter: 0}, action) {
+export default (state = {counter: 0}, action) => {
   switch (action.type) {
     case 'INCREASE_COUNTER': {
         return {
@@ -12,5 +12,3 @@ function counterReducer(state = {counter: 0}, action) {
 
   }
 }
-
-export default counterReducer;
