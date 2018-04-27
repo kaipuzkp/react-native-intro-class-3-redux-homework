@@ -6,8 +6,10 @@ import {
   View,
   Button
 } from 'react-native';
+import { Provider } from 'react-redux';
+import store from './store';
 
-export default class App extends Component {
+class App extends Component {
   constructor(props){
     super(props);
     this.state = {
@@ -47,3 +49,11 @@ const styles = StyleSheet.create({
     textAlign: 'center'
   },
 });
+
+const EnhancedApp = () =>  
+(
+<Provider store={store}>
+  <App />
+</Provider>
+);
+export default App
