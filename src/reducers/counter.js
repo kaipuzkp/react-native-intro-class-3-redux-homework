@@ -1,7 +1,4 @@
 import * as TYPES from '../actions/types'
-// import {payload} from '../../index'
-
-
 
 export default (state = 0, action) => {
   switch (action.type) {
