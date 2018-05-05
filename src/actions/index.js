@@ -1,8 +1,9 @@
 import { ADD_COUNTER } from './types';
 
-export const increaseCounter = () => {
+export const increaseCounter = (num,rate) =>{
   return {
-    type: ADD_COUNTER,
-    payload: 1
+      type: ADD_COUNTER,
+      payload: num,
+      tax:rate,
   }
 }

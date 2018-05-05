@@ -4,7 +4,9 @@ import {
   StyleSheet,
   Text,
   View,
-  Button
+  Button,
+  Slider,
+  TextInput
 } from 'react-native';
 
 import { connect } from 'react-redux';
@@ -15,20 +17,31 @@ class App extends Component {
   constructor(props){
     super(props);
     this.state = {
-      counter: 0
+      counter: 0,
+      payload:"0",
+      value: "10",
     }
   }
 
   render() {
     return (
       <View style={styles.container}>
+        <TextInput style={{height: 40,width:200, borderColor: 'gray', borderWidth: 1}}
+        keyboardType='numeric'
+        onChangeText={(text) => this.setState({payload:text})}
+        placeholder="Please enter your income"
+        // value={this.state.payload.toString()}
+        />
+        <Text>{this.state.value}</Text>
+        <Slider style={styles.slider} step={1} value={10} minimumValue={5} maximumValue={40} onValueChange={(value)=>{this.setState({value:value})}} onSlidingComplete={(value)=>{this.setState({value:value})}}/>
+                
         <Text style={styles.welcome}>
-          Counter Value: {this.props.counter}
+          Your Tax: {this.props.counter}
         </Text>
         <Button 
-          title="Press me"
+          title="Calculate Your Tax"
           style={styles.button}
-          onPress={()=>{this.props.increaseCounter()}}
+          onPress={()=>{this.props.add(parseInt(this.state.payload),parseInt(this.state.value))}}
         />
       </View>
     );
@@ -50,6 +63,10 @@ const styles = StyleSheet.create({
   button: {
     textAlign: 'center'
   },
+  slider:{
+    width: 200,
+    height:10,
+  }
 });
 
 const mapStateToProps = state => {
@@ -60,7 +77,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    increaseCounter: bindActionCreators(increaseCounter, dispatch)
+    add: bindActionCreators(increaseCounter, dispatch)
   }
 }
 
